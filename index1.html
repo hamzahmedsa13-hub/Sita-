@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sita App</title>
+<style>
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:0;background-color:#f4f6f9;color:#333}#splash-screen{position:fixed;top:0;left:0;width:100%;height:100%;background-color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000}.logo-e{font-size:120px;font-weight:bold;color:#e60000;line-height:1;margin:0}.logo-sita{font-size:40px;font-weight:bold;color:#0056b3;letter-spacing:3px;margin-top:5px}.container{max-width:500px;margin:0 auto;padding:20px;display:none}.card{background:#fff;padding:25px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);margin-top:20px}h2{text-align:center;color:#0056b3}.form-group{margin-bottom:15px}label{display:block;margin-bottom:5px;font-weight:bold}input,select{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;box-sizing:border-box;font-size:16px;background:#fff}.btn{width:100%;padding:12px;background-color:#0056b3;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px}.btn-red{background-color:#e60000}.btn-small{width:auto;padding:6px 12px;font-size:13px;margin:0;background-color:#333}.header{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:12px 15px;border-radius:10px;margin-bottom:15px;box-shadow:0 2px 5px rgba(0,0,0,0.05)}.search-box{display:flex;margin-bottom:15px;border-radius:8px;overflow:hidden;border:2px solid #0056b3;background:#fff}.search-box input{border:none;padding:10px;flex:1;outline:none}.search-btn{background:#febd69;border:none;padding:0 16px;cursor:pointer;font-size:18px}.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.product-card{background:#fff;padding:10px;border-radius:10px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.08)}.product-img{width:100%;height:130px;object-fit:cover;background-color:#eee;border-radius:8px;margin-bottom:10px}.price{color:#e60000;font-weight:bold;font-size:18px;margin-top:5px}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:2000}.modal-content{background:#fff;padding:25px;border-radius:12px;width:85%;max-width:400px;text-align:center}
+</style>
+</head>
+<body>
+<div id="splash-screen"><div class="logo-e">E</div><div class="logo-sita">Sita</div></div>
+<div id="login-screen" class="container">
+<h1 style="text-align:center"><span style="color:#e60000">E</span> <span style="color:#0056b3">Sita</span></h1>
+<div class="card">
+<h2>تسجيل الدخول</h2>
+<form onsubmit="enterApp(event)">
+<div class="form-group"><label>الاسم بالكامل:</label><input type="text" id="userName" required></div>
+<div class="form-group"><label>رقم الموبايل (مصر):</label><input type="tel" id="userPhone" required></div>
+<div class="form-group"><label>اختر المحافظة / العنوان:</label><select id="userCity" required><option value="القاهرة">القاهرة</option><option value="الجيزة">الجيزة</option><option value="الإسكندرية">الإسكندرية</option><option value="القليوبية">القليوبية</option><option value="الدقهلية">الدقهلية</option><option value="الشرقية">الشرقية</option><option value="الغربية">الغربية</option><option value="المنوفية">المنوفية</option><option value="أخرى">محافظة أخرى</option></select></div>
+<div class="form-group"><label>تفاصيل العنوان (الشارع / المنطقة):</label><input type="text" id="userAddress" required></div>
+<div class="form-group"><label>البريد الإلكتروني:</label><input type="email" id="userEmail" required></div>
+<div class="form-group"><label>اختر العملة:</label><select id="userCurrency"><option value="ج.م">جنيه مصري (ج.م)</option><option value="$">دولار أمريكي ($)</option><option value="ر.س">ريال سعودي (ر.س)</option><option value="د.إ">درهم إماراتي (د.إ)</option><option value="€">يورو (€)</option></select></div>
+<button type="submit" class="btn">دخول للتطبيق</button>
+</form>
+</div>
+</div>
+<div id="home-screen" class="container">
+<div class="header"><div><strong style="color:#e60000">E</strong> <strong style="color:#0056b3">Sita</strong><div id="welcome-msg" style="font-size:13px;color:#555"></div><div id="address-msg" style="font-size:11px;color:#0056b3"></div></div><button class="btn btn-small" onclick="openAdminLogin()">لوحة الإدارة 🔒</button></div>
+<div class="search-box"><input type="text" id="searchInput" placeholder="ابحث عن منتج..." onkeyup="searchProducts()"><button class="search-btn" onclick="searchProducts()">🔍</button></div>
+<button class="btn btn-red" onclick="openSubscribeModal()">+ اعرض منتجاتك هنا (اشتراك 1$ شهرياً)</button>
+<h3>أحدث المنتجات المعروضة:</h3>
+<div id="products-list" class="products-grid"></div>
+</div>
+<div id="subscribe-modal" class="modal"><div class="modal-content"><h3>اعرض منتجاتك على Sita</h3><p>للاشتراك وعرض منتجاتك على التطبيق بسعر رمزي (1 دولار فقط شهرياً)، تواصل معنا مباشرة عبر الرقم التالي لتفعيل حسابك:</p><h2 style="color:#e60000">01098715983</h2><a href="https://wa.me" target="_blank"><button class="btn" style="background:#25D366">تواصل واتساب الآن</button></a><button class="btn btn-small" style="margin-top:10px" onclick="closeModals()">إغلاق</button></div></div>
+<div id="admin-modal" class="modal"><div class="modal-content"><h3>إضافة منتج جديد للتطبيق</h3><form onsubmit="addNewProduct(event)"><div class="form-group"><label>اسم المنتج:</label><input type="text" id="prodName" required></div><div class="form-group"><label>السعر (بالجنيه):</label><input type="number" id="prodPrice" required></div><div class="form-group"><label>صورة المنتج:</label><input type="file" id="prodImage" accept="image/*" required></div><button type="submit" class="btn">نشر المنتج الآن</button><button type="button" class="btn btn-small" style="margin-top:10px" onclick="closeModals()">إلغاء</button></form></div></div>
+<script>
+const SECRET_PIN="2026";let cur="ج.م";const rates={"ج.م":1,"$":0.02,"ر.س":0.075,"د.إ":0.073,"€":0.018};
+setTimeout(()=>{document.getElementById('splash-screen').style.display='none';document.getElementById('login-screen').style.display='block'},2500);
+let products=JSON.parse(localStorage.getItem('sita_products'))||[{name:"ساعة يد ذكية",price:"500",img:"https://placeholder.com"},{name:"سماعة بلوتوث",price:"350",img:"https://placeholder.com"}];
+function fmt(p){let v=parseFloat(p)*(rates[cur]||1);return cur==="ج.م"?Math.round(v):v.toFixed(2)}
+function renderProducts(arr=products){const list=document.getElementById('products-list');list.innerHTML='';arr.forEach(p=>{list.innerHTML+=`<div class="product-card"><img src="${p.img}" class="product-img"><h4 style="margin:5px 0">${p.name}</h4><div class="price">${fmt(p.price)} ${cur}</div></div>`})}
+function searchProducts(){const q=document.getElementById('searchInput').value.toLowerCase();renderProducts(products.filter(p=>p.name.toLowerCase().includes(q)))}
+function enterApp(e){e.preventDefault();cur=document.getElementById('userCurrency').value;document.getElementById('welcome-msg').innerText='أهلاً، '+document.getElementById('userName').value;document.getElementById('address-msg').innerText='📍 التوصيل إلى: '+document.getElementById('userCity').value+' - '+document.getElementById('userAddress').value;document.getElementById('login-screen').style.display='none';document.getElementById('home-screen').style.display='block';renderProducts()}
+function openSubscribeModal(){document.getElementById('subscribe-modal').style.display='flex'}
+function openAdminLogin(){const pin=prompt("أدخل الرقم السري للإدارة:");if(pin===SECRET_PIN)document.getElementById('admin-modal').style.display='flex';else if(pin!==null)alert("الرقم السري غير صحيح!")}
+function addNewProduct(e){e.preventDefault();const r=new FileReader();r.onload=function(ev){products.unshift({name:document.getElementById('prodName').value,price:document.getElementById('prodPrice').value,img:ev.target.result});localStorage.setItem('sita_products',JSON.stringify(products));renderProducts();closeModals();alert("تم نشر المنتج بنجاح!")};r.readAsDataURL(document.getElementById('prodImage').files[0])}
+function closeModals(){document.getElementById('subscribe-modal').style.display='none';document.getElementById('admin-modal').style.display='none'}
+</script>
+</body>
+</html>
